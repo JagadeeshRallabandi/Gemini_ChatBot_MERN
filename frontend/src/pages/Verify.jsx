@@ -1,11 +1,15 @@
 import React from 'react'
+import { UserData } from '../context/userContext';
+import { useNavigate } from 'react-router-dom';
 
 const Verify = () => {
     const [otp, setOtp] = React.useState("");
+    const {verifyUser, btnLoading} = UserData();
+    const navigate = useNavigate();
         const submitHandler = (e) => {
         e.preventDefault()
-        console.log(otp)
-    }
+        verifyUser(Number(otp), navigate)
+        }
   return (
      <div className='flex justify-center items-center h-screen'>
         <form className='bg-white p-6 rounded shadow-md w-full md:w-[500px]'
@@ -25,7 +29,9 @@ const Verify = () => {
                 required
                 />
         </div>
-        <button className='bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700'>Submit</button>
+        <button className='bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700'>
+            {btnLoading ? "Please Wait..." : " Submit"}
+        </button>
         </form>
     </div>
   )
