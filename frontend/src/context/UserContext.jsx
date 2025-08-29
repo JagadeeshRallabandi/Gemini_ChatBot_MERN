@@ -49,7 +49,7 @@ console.log("Response from backend:", data)
             setBtnLoading(false);
         }
     }
-
+    const [loading, setLoading] = useState(true);
     async function fetchUser(){
         try {
             const {data} = await axios.get(`${server}/api/user/me`, {
@@ -59,15 +59,18 @@ console.log("Response from backend:", data)
             })
             setIsAuth(true);
             setUser(data.user);
+            setLoading(false);
         } catch (error) {
+            console.log(error);
             setIsAuth(false);
+            setLoading(false);
         }
     }
     useEffect(()=>{
         fetchUser()
     },[])
     return (
-        <UserContext.Provider value={{loginUser, btnLoading, isAuth, setIsAuth, user, verifyUser}}>
+        <UserContext.Provider value={{loginUser, btnLoading, isAuth, setIsAuth, user, verifyUser, loading}}>
             {children}
             <Toaster/>
         </UserContext.Provider>

@@ -5,16 +5,16 @@ import Verify from './pages/Verify'
 import { UserData } from './context/userContext'
 
 const App = () => {
-  const {user, isAuth} = UserData();
+  const {user, isAuth, loading} = UserData();
   return (
     <>
-      <BrowserRouter>
-      <Routes>
-        <Route path='/' element={isAuth ? <Home/> : <Login/>} />
-        <Route path='/login' element={isAuth ? <Home/>:<Login/>} />
-        <Route path='/verify' element={isAuth ? <Home/>:<Verify/>} />
-      </Routes>
-      </BrowserRouter>
+    {loading?<h1 className='text-3xl text-white'>Loading...</h1>:<BrowserRouter>
+    <Routes>
+      <Route path='/' element={isAuth ? <Home/> : <Login/>} />
+      <Route path='/login' element={isAuth ? <Home/>:<Login/>} />
+      <Route path='/verify' element={isAuth ? <Home/>:<Verify/>} />
+    </Routes>
+    </BrowserRouter>}
     </>
   )
 }
