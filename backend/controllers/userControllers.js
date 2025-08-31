@@ -3,6 +3,7 @@ import { User } from "../models/User.js";
 import jwt from 'jsonwebtoken';
 export const loginUser = async (req, res) => {
     try {
+      
         const { email } = req.body;
 
         let user = await User.findOne({email})
@@ -13,6 +14,7 @@ export const loginUser = async (req, res) => {
                 
             });           
         }
+      
         const otp = Math.floor(Math.random() * 1000000);
 
         const verifyToken = jwt.sign({user, otp}, process.env.Activation_sec,{

@@ -18,7 +18,9 @@ export const UserProvider = ({ children }) => {
       navigate("/verify");
       setBtnLoading(false);
     } catch (error) {
-      toast.error(error.response.data.message);
+      console.log(error)
+      toast.error(error?.response.data.message);
+      
       setBtnLoading(false);
     }
   }
